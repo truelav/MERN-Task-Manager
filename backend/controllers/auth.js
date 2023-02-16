@@ -65,9 +65,12 @@ export const login = async (req, res) => {
       expiresIn: "1d",
     });
 
-    res.cookie("access cookie", token, {
-      httpOnly: true,
-    });
+    res
+      .cookie("access cookie", token, {
+        httpOnly: true,
+      })
+      .status(200)
+      .json({ message: "Login Success" });
   } catch (error) {
     console.log(error);
     res.status(500).json(error);
