@@ -12,6 +12,10 @@ body {
   text-align: center;
 }
 
+h2 {
+  text-align: left;
+}
+
 .Counter {
   margin-bottom: 100px;
 }
@@ -19,6 +23,10 @@ body {
 .Post__Item {
   display: flex;
   justify-content: space-between;
+  padding: 15px 25px;
+  border: solid 1px black;
+  border-radius: 15px;
+  margin-bottom: 15px;
 }
 
 .Post__Item__Content {

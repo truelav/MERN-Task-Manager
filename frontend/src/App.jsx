@@ -1,17 +1,18 @@
 import { useState } from "react";
-
-import Counter from "./components/Counter";
-import PostItem from "./components/PostItem";
+import PostList from "./components/PostList";
 
 import "./styles/App.css";
 
 function App() {
-  const [count, setCount] = useState(0);
+  const [posts, setPosts] = useState([
+    { id: 1, title: "Javascript", body: "This is a programming Language" },
+    { id: 2, title: "Python", body: "This is a programming Language" },
+    { id: 3, title: "C++", body: "This is a programming Language" },
+  ]);
 
   return (
     <div className="App">
-      <Counter />
-      <PostItem />
+      <PostList posts={posts} />
     </div>
   );
 }
