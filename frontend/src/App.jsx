@@ -1,17 +1,17 @@
 import { useState } from "react";
-import "./App.css";
+
+import Counter from "./components/Counter";
+import PostItem from "./components/PostItem";
+
+import "./styles/App.css";
 
 function App() {
   const [count, setCount] = useState(0);
 
   return (
     <div className="App">
-      <div className="Counter">
-        <h2>{count}</h2>
-
-        <button onClick={() => setCount(count + 1)}>Increment</button>
-        <button onClick={() => setCount(count - 1)}>Decrement</button>
-      </div>
+      <Counter />
+      <PostItem />
     </div>
   );
 }
