@@ -13,7 +13,7 @@ function App() {
 
   return (
     <div className="App">
-      <Form />
+      <Form posts={posts} setPosts={setPosts} />
       <PostList posts={posts} />
     </div>
   );

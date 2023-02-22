@@ -2,12 +2,13 @@ import { useState } from "react";
 
 function PostItem(props) {
   const { id, title, body } = props.post;
+  const { idx } = props;
 
   return (
     <div className="Post__Item">
       <div className="Post__Item__Content">
         <h2>
-          {id}. {title}
+          {idx + 1}. {title}
         </h2>
         <p>{body}</p>
       </div>
