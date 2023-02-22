@@ -3,6 +3,7 @@ import { useState } from "react";
 function PostItem(props) {
   const { id, title, body } = props.post;
   const { idx } = props;
+  const { deletePost } = props;
 
   return (
     <div className="Post__Item">
@@ -13,7 +14,7 @@ function PostItem(props) {
         <p>{body}</p>
       </div>
       <div className="Post__Item__Buttons">
-        <button>Delete</button>
+        <button onClick={() => deletePost(props.post)}>Delete</button>
         <button>Edit</button>
       </div>
     </div>

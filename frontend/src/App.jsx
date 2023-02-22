@@ -1,6 +1,6 @@
 import { useState } from "react";
 import PostList from "./components/PostList";
-import Form from "./components/Form";
+import PostForm from "./components/PostForm";
 
 import "./styles/App.css";
 
@@ -11,10 +11,16 @@ function App() {
     { id: 3, title: "C++", body: "This is a programming Language" },
   ]);
 
+  const createPost = (newPost) => {};
+
+  const deletePost = (post) => {
+    setPosts(posts.filter((p) => p.id !== post.id));
+  };
+
   return (
     <div className="App">
-      <Form posts={posts} setPosts={setPosts} />
-      <PostList posts={posts} />
+      <PostForm posts={posts} setPosts={setPosts} />
+      <PostList posts={posts} deletePost={deletePost} />
     </div>
   );
 }
