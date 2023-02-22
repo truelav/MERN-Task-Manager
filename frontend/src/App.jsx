@@ -1,5 +1,6 @@
 import { useState } from "react";
 import PostList from "./components/PostList";
+import Form from "./components/Form";
 
 import "./styles/App.css";
 
@@ -12,6 +13,7 @@ function App() {
 
   return (
     <div className="App">
+      <Form />
       <PostList posts={posts} />
     </div>
   );
