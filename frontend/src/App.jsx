@@ -1,4 +1,5 @@
-import { useState } from "react";
+import { useMemo, useState } from "react";
+import axios from "axios";
 import PostList from "./components/PostList";
 import PostForm from "./components/PostForm";
 
@@ -6,12 +7,26 @@ import "./styles/App.css";
 import MySelect from "./UI/MySelect";
 
 function App() {
-  const [posts, setPosts] = useState([
-    { id: 1, title: "Javascript", body: "This is a programming Language" },
-    { id: 2, title: "Python", body: "This is a programming Language" },
-    { id: 3, title: "C++", body: "This is a programming Language" },
-  ]);
+  const [posts, setPosts] = useState([]);
   const [selectedSort, setSelectedSort] = useState("");
+
+  const fetchPosts = async (limit, page) => {
+    const response = await axios.get(
+      "https://jsonplaceholder.typicode.com/posts",
+      {
+        params: {
+          _limit: limit || 15,
+          _page: page || 1,
+        },
+      }
+    );
+    console.log(response.data);
+    setPosts(response.data);
+  };
+
+  useMemo(() => {
+    fetchPosts(15, 1);
+  }, []);
 
   const createPost = (newPost) => {};
 

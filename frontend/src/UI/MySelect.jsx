@@ -9,7 +9,6 @@ export default function MySelect({ defaultValue, options, value, onChange }) {
         </option>
 
         {options.map((o, i) => {
-          console.log(o);
           return (
             <option value={o.value} key={i}>
               {o.name}

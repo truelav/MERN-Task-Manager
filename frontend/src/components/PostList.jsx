@@ -1,6 +1,7 @@
 import PostItem from "./PostItem";
 
 function PostList({ posts, deletePost }) {
+  console.log(posts);
   if (posts.length === 0) {
     return (
       <div>
