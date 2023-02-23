@@ -2,12 +2,14 @@ import { useMemo, useState } from "react";
 import axios from "axios";
 import PostList from "./components/PostList";
 import PostForm from "./components/PostForm";
+import MySelect from "./UI/MySelect";
 
 import "./styles/App.css";
-import MySelect from "./UI/MySelect";
+import PaginationComp from "./UI/pagination/Pagination";
 
 function App() {
   const [posts, setPosts] = useState([]);
+  const [currentPage, setCurrentPage] = useState(1);
   const [selectedSort, setSelectedSort] = useState("");
 
   const fetchPosts = async (limit, page) => {
@@ -15,7 +17,7 @@ function App() {
       "https://jsonplaceholder.typicode.com/posts",
       {
         params: {
-          _limit: limit || 15,
+          _limit: limit || 25,
           _page: page || 1,
         },
       }
@@ -25,7 +27,7 @@ function App() {
   };
 
   useMemo(() => {
-    fetchPosts(15, 1);
+    fetchPosts(25, 1);
   }, []);
 
   const createPost = (newPost) => {};
@@ -51,6 +53,7 @@ function App() {
       />
 
       <PostList posts={posts} deletePost={deletePost} />
+      <PaginationComp totalPages={posts.length} currentPage={currentPage} />
     </div>
   );
 }
