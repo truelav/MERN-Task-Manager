@@ -34,12 +34,17 @@ function App() {
   const createPost = (newPost) => {};
 
   const deletePost = (post) => {
+    console.log("delete clicked " + post);
     setPosts(posts.filter((p) => p.id !== post.id));
   };
 
-  const sortPosts = (sort) => {
-    console.log(sort);
-  };
+  const sortPosts = useMemo(() => {
+    console.log("Sorted functionality triggered");
+    if (selectedSort) {
+      return;
+    }
+    return posts;
+  }, [selectedSort, posts]);
 
   const changePage = (newPage) => {
     setCurrentPage(newPage);
@@ -59,7 +64,10 @@ function App() {
 
       <MyInput
         value={searchQuery}
-        onChange={(e) => setSearchQuery(e.target.value)}
+        onChange={(e) => {
+          console.log(searchQuery);
+          setSearchQuery(e.target.value);
+        }}
         placeholder="Search..."
       />
 

@@ -15,7 +15,15 @@ function PostItem(props) {
         <p>{body}</p>
       </div>
       <div className="Post__Item__Buttons">
-        <button onClick={() => deletePost(props.post)}>Delete</button>
+        <button
+          onClick={() => {
+            console.log("clicked the post item delete ", props.post);
+            const post = props.post;
+            deletePost(post);
+          }}
+        >
+          Delete
+        </button>
         <button>Edit</button>
       </div>
     </div>
