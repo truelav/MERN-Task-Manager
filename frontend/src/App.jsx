@@ -1,8 +1,9 @@
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import axios from "axios";
 import PostList from "./components/PostList";
 import PostForm from "./components/PostForm";
 import MySelect from "./UI/MySelect";
+import MyInput from "./UI/MyInput";
 
 import "./styles/App.css";
 import PaginationComp from "./UI/pagination/Pagination";
@@ -11,6 +12,7 @@ function App() {
   const [posts, setPosts] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
   const [selectedSort, setSelectedSort] = useState("");
+  const [searchQuery, setSearchQuery] = useState("");
 
   const fetchPosts = async (limit, page) => {
     const response = await axios.get(
@@ -25,7 +27,7 @@ function App() {
     setPosts(response.data);
   };
 
-  useMemo(() => {
+  useEffect(() => {
     fetchPosts(100, 1);
   }, []);
 
@@ -55,7 +57,17 @@ function App() {
         ]}
       />
 
-      <PostList posts={posts} deletePost={deletePost} />
+      <MyInput
+        value={searchQuery}
+        onChange={(e) => setSearchQuery(e.target.value)}
+        placeholder="Search..."
+      />
+
+      <PostList
+        posts={posts}
+        deletePost={deletePost}
+        currentPage={currentPage}
+      />
       <PaginationComp
         totalPages={posts.length}
         currentPage={currentPage}

@@ -9,3 +9,9 @@ export const getPagesArray = (totalPages) => {
   }
   return result;
 };
+
+export const paginatedItems = [
+  [0, 9],
+  [10, 19],
+  [20, 29],
+];

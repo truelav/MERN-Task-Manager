@@ -4,12 +4,13 @@ function PostItem(props) {
   const { id, title, body } = props.post;
   const { idx } = props;
   const { deletePost } = props;
+  const { currentPage } = props;
 
   return (
     <div className="Post__Item">
       <div className="Post__Item__Content">
         <h2>
-          {idx + 1}. {title}
+          {id}. {title}
         </h2>
         <p>{body}</p>
       </div>
