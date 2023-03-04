@@ -17,17 +17,16 @@ function App() {
       "https://jsonplaceholder.typicode.com/posts",
       {
         params: {
-          _limit: limit || 25,
+          _limit: limit || 10,
           _page: page || 1,
         },
       }
     );
-    console.log(response.data);
     setPosts(response.data);
   };
 
   useMemo(() => {
-    fetchPosts(25, 1);
+    fetchPosts(100, 1);
   }, []);
 
   const createPost = (newPost) => {};
@@ -38,6 +37,10 @@ function App() {
 
   const sortPosts = (sort) => {
     console.log(sort);
+  };
+
+  const changePage = (newPage) => {
+    setCurrentPage(newPage);
   };
 
   return (
@@ -53,7 +56,11 @@ function App() {
       />
 
       <PostList posts={posts} deletePost={deletePost} />
-      <PaginationComp totalPages={posts.length} currentPage={currentPage} />
+      <PaginationComp
+        totalPages={posts.length}
+        currentPage={currentPage}
+        changePage={changePage}
+      />
     </div>
   );
 }

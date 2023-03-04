@@ -1,13 +1,14 @@
 import { getPagesArray, getTotalPagesCount } from "../../utils/pages";
 
-import React from "react";
-
 export default function PaginationComp({
   totalPages,
   currentPage,
   changePage,
 }) {
   const pagesArray = getPagesArray(getTotalPagesCount(totalPages, 10));
+
+  const handleChangePage = () => {};
+
   return (
     <div className="Pagination__Container">
       {pagesArray.map((page, i) => {
@@ -19,7 +20,7 @@ export default function PaginationComp({
                 : "Page__Number__Container"
             }
             key={page}
-            onClick={changePage}
+            onClick={() => changePage(page)}
           >
             {page}
           </div>
