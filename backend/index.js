@@ -21,7 +21,7 @@ console.log(process.env.PORT);
 const connectDB = async () => {
   try {
     mongoose.set("strictQuery", false);
-
+    await mongoose.connect("mongodb://127.0.0.1:27017/task_manager_rec");
     console.log("Connected to the DB");
   } catch (err) {
     console.log(err);
