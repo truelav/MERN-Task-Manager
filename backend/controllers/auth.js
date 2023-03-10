@@ -4,15 +4,6 @@ import createError from "../utils/error.js";
 import User from "../models/User.js";
 
 export const register = async (req, res) => {
-  // check if the fields exist
-  //a better practice is validation on front end too
-  if (req.body.name || req.body.email || req.body.password) {
-    res
-      .status(300)
-      .json("Missing one of the required fields (name, email, pass)");
-    return;
-  }
-
   try {
     const salt = await bcryptjs.genSalt(10);
     const hashedPassword = await bcryptjs.hash(req.body.password, salt);
@@ -23,7 +14,6 @@ export const register = async (req, res) => {
       password: hashedPassword,
     });
 
-    // saving new user in the Database
     await newUser.save();
     return res.status(201).json(`${req.body.name} was created with success`);
   } catch (error) {
@@ -33,10 +23,6 @@ export const register = async (req, res) => {
 };
 
 export const login = async (req, res) => {
-  if (!req.body.email || !req.body.password) {
-    return res.status(400).json("Missing required field email or password");
-  }
-
   try {
     const user = await User.findOne({ email: req.body.email }).select({
       name,
