@@ -5,6 +5,9 @@ import cors from "cors";
 import morgan from "morgan";
 import cookieParser from "cookie-parser";
 
+import { registerValidation } from "./utils/validations/auth.js";
+import { validationResult } from "express-validator";
+
 const PORT = process.env.PORT || 4444;
 const app = express();
 
@@ -34,6 +37,16 @@ app.use(express.json());
 
 app.get("/", (req, res) => {
   res.send("Hello World vasilica");
+});
+
+app.post("/auth/register", registerValidation, (req, res) => {
+  const errors = validationResult(req);
+
+  if (!errors.isEmpty()) {
+    return res.status(400).json(errors.array());
+  }
+
+  res.status(200).json({ success: true });
 });
 
 app.post("/auth/login", (req, res) => {
