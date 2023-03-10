@@ -1,6 +1,7 @@
 import express from "express";
 import jwt from "jsonwebtoken";
 import mongoose from "mongoose";
+import bcrypt from "bcryptjs";
 import cors from "cors";
 import morgan from "morgan";
 import cookieParser from "cookie-parser";
@@ -8,10 +9,10 @@ import cookieParser from "cookie-parser";
 import { registerValidation } from "./utils/validations/auth.js";
 import { validationResult } from "express-validator";
 
+import User from "./models/User.js";
+
 const PORT = process.env.PORT || 4444;
 const app = express();
-
-console.log(process.env.PORT);
 
 //Connecting to the local MongoDB
 // mongoose
@@ -24,7 +25,7 @@ console.log(process.env.PORT);
 const connectDB = async () => {
   try {
     mongoose.set("strictQuery", false);
-    await mongoose.connect("mongodb://127.0.0.1:27017/task_manager_rec");
+    await mongoose.connect("mongodb://127.0.0.1:27017/local");
     console.log("Connected to the DB");
   } catch (err) {
     console.log(err);
@@ -39,19 +40,36 @@ app.get("/", (req, res) => {
   res.send("Hello World vasilica");
 });
 
-app.post("/auth/register", registerValidation, (req, res) => {
+app.post("/auth/register", registerValidation, async (req, res) => {
+  try {
+  } catch (error) {
+    res.status(500).json({
+      message: "Could not register user",
+    });
+  }
+
   const errors = validationResult(req);
 
   if (!errors.isEmpty()) {
     return res.status(400).json(errors.array());
   }
 
-  res.status(200).json({ success: true });
+  const { email, password, name, avatarUrl } = req.body;
+
+  const salt = await bcrypt.genSalt(10);
+  const hashedPassword = await bcrypt.hash(password, salt);
+
+  const newUser = new User({
+    email,
+    password: hashedPassword,
+    name,
+    avatarUrl,
+  });
+
+  await newUser.save();
 });
 
 app.post("/auth/login", (req, res) => {
-  console.log(req.body);
-
   //creating token when we are signing in
   const token = jwt.sign(
     {
