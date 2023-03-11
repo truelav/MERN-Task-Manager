@@ -4,10 +4,11 @@ import cors from "cors";
 import morgan from "morgan";
 import cookieParser from "cookie-parser";
 
-import { registerValidation } from "./utils/validations/auth.js";
+import { registerValidation } from "./utils/validations.js";
 
 import { checkAuth } from "./utils/checkAuth.js";
-import { authMe, login, register } from "./controllers/userAuthControllers.js";
+import * as AuthControllers from "./controllers/userAuthControllers.js";
+import * as PostsControllers from "./controllers/postControllers.js";
 
 const PORT = process.env.PORT || 4444;
 const app = express();
@@ -31,11 +32,15 @@ app.get("/", (req, res) => {
   res.send("Hello World vasilica");
 });
 
-app.post("/auth/register", register);
+app.post("/auth/register", registerValidation, AuthControllers.register);
+app.post("/auth/login", AuthControllers.login);
+app.get("/auth/me", checkAuth, AuthControllers.authMe);
 
-app.post("/auth/login", login);
-
-app.get("/auth/me", checkAuth, authMe);
+// app.get("/posts", PostControllers.getAll);
+// app.get("/posts/:id", PostControllers.getOne);
+// app.post("/posts", checkAuth, PostControllers.create);
+// app.delete("/posts", checkAuth, PostControllers.remove);
+// app.patch("/posts", checkAuth, PostControllers.edit);
 
 app.listen(3000, (err) => {
   if (err) return console.log(err);
