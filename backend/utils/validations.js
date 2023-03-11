@@ -18,5 +18,5 @@ export const createPostValidation = [
   body("title").isLength({ min: 5 }).isString(),
   body("postBody").isLength({ min: 15 }).isString(),
   body("tags").optional().isString(),
-  body("imageUrl").isURL(),
+  body("imageUrl").optional().isURL(),
 ];

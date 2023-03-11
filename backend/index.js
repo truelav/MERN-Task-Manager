@@ -4,7 +4,10 @@ import cors from "cors";
 import morgan from "morgan";
 import cookieParser from "cookie-parser";
 
-import { registerValidation } from "./utils/validations.js";
+import {
+  createPostValidation,
+  registerValidation,
+} from "./utils/validations.js";
 
 import { checkAuth } from "./utils/checkAuth.js";
 import * as AuthControllers from "./controllers/userAuthControllers.js";
@@ -36,11 +39,11 @@ app.post("/auth/register", registerValidation, AuthControllers.register);
 app.post("/auth/login", AuthControllers.login);
 app.get("/auth/me", checkAuth, AuthControllers.authMe);
 
-// app.get("/posts", PostControllers.getAll);
-// app.get("/posts/:id", PostControllers.getOne);
-// app.post("/posts", checkAuth, PostControllers.create);
-// app.delete("/posts", checkAuth, PostControllers.remove);
-// app.patch("/posts", checkAuth, PostControllers.edit);
+app.post("/posts", checkAuth, PostsControllers.create);
+// app.get("/posts", PostsControllers.getAll);
+// app.get("/posts/:id", PostsControllers.getOne);
+// app.delete("/posts", checkAuth, PostsControllers.remove);
+// app.patch("/posts", checkAuth, PostsControllers.edit);
 
 app.listen(3000, (err) => {
   if (err) return console.log(err);
