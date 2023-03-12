@@ -78,3 +78,26 @@ export const getOne = async (req, res) => {
     res.status(500).json({ message: error });
   }
 };
+
+export const remove = async (req, res) => {
+  try {
+    const postId = req.params.id;
+    await Post.findByIdAndDelete(
+      {
+        _id: postId,
+      },
+      (error, currentPost) => {
+        if (error) {
+          console.log(error);
+          return res.status(500).json({ message: error });
+        }
+        if (!currentPost) {
+          return res.status(404).json({ message: "Could not found the post" });
+        }
+        return res.json({ message: "Post Was Deleted" });
+      }
+    );
+  } catch (error) {
+    res.status(500).json({ message: error });
+  }
+};
