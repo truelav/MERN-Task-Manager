@@ -39,9 +39,9 @@ app.post("/auth/register", registerValidation, AuthControllers.register);
 app.post("/auth/login", AuthControllers.login);
 app.get("/auth/me", checkAuth, AuthControllers.authMe);
 
+app.get("/posts", PostsControllers.getAll);
 app.post("/posts", checkAuth, PostsControllers.create);
-// app.get("/posts", PostsControllers.getAll);
-// app.get("/posts/:id", PostsControllers.getOne);
+app.get("/posts/:id", checkAuth, PostsControllers.getOne);
 // app.delete("/posts", checkAuth, PostsControllers.remove);
 // app.patch("/posts", checkAuth, PostsControllers.edit);
 

@@ -80,6 +80,9 @@ export const getOne = async (req, res) => {
 };
 
 export const remove = async (req, res) => {
+  //we need to check if the token of the user is the sam
+  //as the creator of the post
+
   try {
     const postId = req.params.id;
     await Post.findByIdAndDelete(
