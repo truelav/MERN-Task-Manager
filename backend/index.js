@@ -1,5 +1,6 @@
 import express from "express";
 import mongoose from "mongoose";
+import multer from "multer";
 import cors from "cors";
 import morgan from "morgan";
 import cookieParser from "cookie-parser";
@@ -15,6 +16,17 @@ import * as PostsControllers from "./controllers/postControllers.js";
 
 const PORT = process.env.PORT || 4444;
 const app = express();
+
+const storage = multer.diskStorage({
+  destination: (_, __, cb) => {
+    cb(null, "uploads");
+  },
+  filename: (_, file, cb) => {
+    cb(null, file.originalname);
+  },
+});
+
+const upload = multer({ storage });
 
 const connectDB = async () => {
   try {
@@ -39,10 +51,16 @@ app.post("/auth/register", registerValidation, AuthControllers.register);
 app.post("/auth/login", AuthControllers.login);
 app.get("/auth/me", checkAuth, AuthControllers.authMe);
 
-app.get("/posts", PostsControllers.getAll);
+app.post("/post", upload.single("image"), (req, res) => {
+  res.status(202).json({
+    url: `/uploads/${req.file.originalname}`,
+  });
+});
+
 app.post("/posts", checkAuth, PostsControllers.create);
-app.get("/posts/:id", checkAuth, PostsControllers.getOne);
-// app.delete("/posts", checkAuth, PostsControllers.remove);
+app.get("/posts", PostsControllers.getAll);
+app.get("/posts/:id", PostsControllers.getOne);
+app.delete("/posts", checkAuth, PostsControllers.remove);
 // app.patch("/posts", checkAuth, PostsControllers.edit);
 
 app.listen(3000, (err) => {

@@ -104,3 +104,8 @@ export const remove = async (req, res) => {
     res.status(500).json({ message: error });
   }
 };
+
+export const edit = async (req, res) => {
+  try {
+  } catch (error) {}
+};
