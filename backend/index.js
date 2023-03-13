@@ -17,17 +17,6 @@ import * as PostsControllers from "./controllers/postControllers.js";
 const PORT = process.env.PORT || 4444;
 const app = express();
 
-const storage = multer.diskStorage({
-  destination: (_, __, cb) => {
-    cb(null, "uploads");
-  },
-  filename: (_, file, cb) => {
-    cb(null, file.originalname);
-  },
-});
-
-const upload = multer({ storage });
-
 const connectDB = async () => {
   try {
     mongoose.set("strictQuery", false);
@@ -43,6 +32,21 @@ const connectDB = async () => {
 app.use(express.json());
 // app.use(cors);
 
+// when requesting this route use the static function and check if there
+// is the file with that name
+app.use("uploads", express.static("uploads"));
+
+const storage = multer.diskStorage({
+  destination: (_, __, cb) => {
+    cb(null, "uploads");
+  },
+  filename: (_, file, cb) => {
+    cb(null, file.originalname);
+  },
+});
+
+const upload = multer({ storage });
+
 app.get("/", (req, res) => {
   res.send("Hello World vasilica");
 });
@@ -51,10 +55,14 @@ app.post("/auth/register", registerValidation, AuthControllers.register);
 app.post("/auth/login", AuthControllers.login);
 app.get("/auth/me", checkAuth, AuthControllers.authMe);
 
-app.post("/post", upload.single("image"), (req, res) => {
-  res.status(202).json({
-    url: `/uploads/${req.file.originalname}`,
-  });
+app.post("/upload", checkAuth, upload.single("image"), async (req, res) => {
+  try {
+    res.status(202).json({
+      url: `/uploads/${req.file.originalname}`,
+    });
+  } catch (error) {
+    console.log(error);
+  }
 });
 
 app.post("/posts", checkAuth, PostsControllers.create);
