@@ -2,18 +2,7 @@ import Post from "../models/Post.js";
 import { validationResult } from "express-validator";
 
 export const create = async (req, res) => {
-  // let userId = req.id;
-  // return res.json({ messsage: userId });
-
   try {
-    // const errors = validationResult(req);
-
-    // if (!errors.isEmpty()) {
-    //   return res.status(400).json(errors.array());
-    // }
-    // const userId = req.id;
-    // const { title, postBody, tags, imageUrl } = req.body;
-
     const doc = new Post({
       title: req.body.title,
       postBody: req.body.postBody,
