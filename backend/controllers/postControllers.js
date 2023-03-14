@@ -91,5 +91,25 @@ export const remove = async (req, res) => {
 
 export const edit = async (req, res) => {
   try {
-  } catch (error) {}
+    const postId = req.params.id;
+    const { title, postBody, tags, imageUrl } = req.body;
+
+    Post.findOneAndUpdate(
+      { _id: postId },
+      { title, postBody, tags, imageUrl },
+      (error, data) => {
+        if (error) {
+          console.log(error);
+        } else {
+          console.log(data);
+        }
+      }
+    );
+    res.status(200).json({ message: "Post modified successfully" });
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({ message: error });
+  }
 };
+
+export const uploadImg = async (req, res) => {};

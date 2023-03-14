@@ -38,59 +38,10 @@ app.use(express.json());
 app.use(morgan("tiny"));
 // app.use(cors);
 
-// when requesting this route use the static function and check if there
-// is the file with that name
-
 //    ROUTES
 app.use("/api", allRoutes);
-
-app.use("uploads", express.static("uploads"));
-
-const storage = multer.diskStorage({
-  destination: (_, __, cb) => {
-    cb(null, "uploads");
-  },
-  filename: (_, file, cb) => {
-    cb(null, file.originalname);
-  },
-});
-
-const upload = multer({ storage });
-
-app.get("/", (req, res) => {
-  res.send("Hello World vasilica");
-});
-
-// app.post(
-//   "/auth/register",
-//   registerValidation,
-//   handleValidationErrors,
-//   AuthControllers.register
-// );
-// app.post(
-//   "/auth/login",
-//   loginValidation,
-//   handleValidationErrors,
-//   AuthControllers.login
-// );
-// app.get("/auth/me", checkAuth, AuthControllers.authMe);
-
-app.post("/upload", checkAuth, upload.single("image"), async (req, res) => {
-  try {
-    res.status(202).json({
-      url: `/uploads/${req.file.originalname}`,
-    });
-  } catch (error) {
-    console.log(error);
-  }
-});
-
-// Post Requests
-// app.post("/posts", checkAuth, PostsControllers.create);
-// app.get("/posts", PostsControllers.getAll);
-// app.get("/posts/:id", PostsControllers.getOne);
-// app.delete("/posts", checkAuth, PostsControllers.remove);
-// app.patch("/posts", checkAuth, PostsControllers.edit);
+app.use("/uploads", express.static("uploads"));
+app.get("/", (req, res) => res.send("Hello World vasilica"));
 
 app.listen(3000, (err) => {
   if (err) return console.log(err);
