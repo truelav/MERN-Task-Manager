@@ -16,6 +16,8 @@ import * as AuthControllers from "./controllers/userAuthControllers.js";
 import * as PostsControllers from "./controllers/postControllers.js";
 import handleValidationErrors from "./utils/handleValidationErrors.js";
 
+import allRoutes from "./routes/index.js";
+
 const PORT = process.env.PORT || 4444;
 const app = express();
 
@@ -29,13 +31,19 @@ const connectDB = async () => {
   }
 };
 
+//        MIDLLEWARE
 // By Default Node doesnt know how to work with JSON
 // This will make req.body read the JSON we are sending from the user
 app.use(express.json());
+app.use(morgan("tiny"));
 // app.use(cors);
 
 // when requesting this route use the static function and check if there
 // is the file with that name
+
+//    ROUTES
+app.use("/api", allRoutes);
+
 app.use("uploads", express.static("uploads"));
 
 const storage = multer.diskStorage({
