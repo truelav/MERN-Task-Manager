@@ -67,7 +67,6 @@ export const login = async (req, res) => {
 };
 
 export const authMe = async (req, res) => {
-  console.log(req.id);
   try {
     const user = await User.findById(req.id);
     res.status(200).json({ message: "Success", user });

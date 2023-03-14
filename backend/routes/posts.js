@@ -8,7 +8,7 @@ const router = express.Router();
 router.post("/posts", checkAuth, PostsControllers.create);
 router.get("/posts", PostsControllers.getAll);
 router.get("/posts/:id", PostsControllers.getOne);
-router.delete("/posts", checkAuth, PostsControllers.remove);
+router.delete("/posts/:id", checkAuth, PostsControllers.remove);
 router.patch("/posts", checkAuth, PostsControllers.edit);
 
 export default router;

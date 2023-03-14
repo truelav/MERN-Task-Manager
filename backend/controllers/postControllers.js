@@ -39,57 +39,52 @@ export const getOne = async (req, res) => {
     // return the updated post with          (Third parameter)
     // do all the operations callback        (Fourth parameter)
 
-    const currentPost = Post.findOneAndUpdate(
-      {
-        _id: postId,
-      },
-      {
-        $inc: { viewCount: 1 },
-      },
-      {
-        returnDocument: "after",
-      },
-      (error, currentPost) => {
-        if (error) {
-          console.log(error);
-          return res.status(500).json({ message: error });
-        }
-        if (!currentPost) {
-          return res.status(404).json({ message: "Could not found the post" });
-        }
+    // const currentPost = Post.findOneAndUpdate(
+    //   {
+    //     _id: postId,
+    //   },
+    //   {
+    //     $inc: { viewCount: 1 },
+    //   },
+    //   {
+    //     returnDocument: "after",
+    //   },
+    //   (error, currentPost) => {
+    //     if (error) {
+    //       console.log(error);
+    //       return res.status(500).json({ message: error });
+    //     }
+    //     if (!currentPost) {
+    //       return res.status(404).json({ message: "Could not found the post" });
+    //     }
 
-        return res.json(currentPost);
-      }
-    );
+    //     return res.json(currentPost);
+    //   }
+    // );
 
-    res.status(200).json(allPosts);
+    const currentPost = await Post.findById(postId);
+
+    res.status(200).json({ message: currentPost });
   } catch (error) {
     res.status(500).json({ message: error });
   }
 };
 
 export const remove = async (req, res) => {
-  //we need to check if the token of the user is the sam
+  //we need to check if the token of the user is the same
   //as the creator of the post
+  // Also need to handle the errors
 
   try {
     const postId = req.params.id;
-    await Post.findByIdAndDelete(
-      {
-        _id: postId,
-      },
-      (error, currentPost) => {
-        if (error) {
-          console.log(error);
-          return res.status(500).json({ message: error });
-        }
-        if (!currentPost) {
-          return res.status(404).json({ message: "Could not found the post" });
-        }
-        return res.json({ message: "Post Was Deleted" });
-      }
-    );
+    // const post = await Post.findById(postId);
+    // const userId = post.user;
+    // console.log(userId);
+    // res.status(201).json(userId);
+    const user = await Post.findByIdAndDelete(postId);
+    res.status(200).json({ message: "Post Deleted Successfully", user });
   } catch (error) {
+    console.log(error);
     res.status(500).json({ message: error });
   }
 };
