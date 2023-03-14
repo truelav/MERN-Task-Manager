@@ -61,19 +61,20 @@ app.get("/", (req, res) => {
   res.send("Hello World vasilica");
 });
 
-app.post(
-  "/auth/register",
-  registerValidation,
-  handleValidationErrors,
-  AuthControllers.register
-);
-app.post(
-  "/auth/login",
-  loginValidation,
-  handleValidationErrors,
-  AuthControllers.login
-);
-app.get("/auth/me", checkAuth, AuthControllers.authMe);
+// app.post(
+//   "/auth/register",
+//   registerValidation,
+//   handleValidationErrors,
+//   AuthControllers.register
+// );
+// app.post(
+//   "/auth/login",
+//   loginValidation,
+//   handleValidationErrors,
+//   AuthControllers.login
+// );
+// app.get("/auth/me", checkAuth, AuthControllers.authMe);
+
 app.post("/upload", checkAuth, upload.single("image"), async (req, res) => {
   try {
     res.status(202).json({
@@ -85,11 +86,11 @@ app.post("/upload", checkAuth, upload.single("image"), async (req, res) => {
 });
 
 // Post Requests
-app.post("/posts", checkAuth, PostsControllers.create);
-app.get("/posts", PostsControllers.getAll);
-app.get("/posts/:id", PostsControllers.getOne);
-app.delete("/posts", checkAuth, PostsControllers.remove);
-app.patch("/posts", checkAuth, PostsControllers.edit);
+// app.post("/posts", checkAuth, PostsControllers.create);
+// app.get("/posts", PostsControllers.getAll);
+// app.get("/posts/:id", PostsControllers.getOne);
+// app.delete("/posts", checkAuth, PostsControllers.remove);
+// app.patch("/posts", checkAuth, PostsControllers.edit);
 
 app.listen(3000, (err) => {
   if (err) return console.log(err);

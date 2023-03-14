@@ -7,6 +7,8 @@ export default (req, res, next) => {
   // Otherwise run the next function
 
   if (!errors.isEmpty()) {
+    console.log(errors.array());
+
     return res.status(400).json({ message: errors.array() });
   }
 

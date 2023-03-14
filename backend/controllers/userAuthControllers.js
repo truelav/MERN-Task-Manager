@@ -67,11 +67,12 @@ export const login = async (req, res) => {
 };
 
 export const authMe = async (req, res) => {
+  console.log(req.id);
   try {
     const user = await User.findById(req.id);
-
     res.status(200).json({ message: "Success", user });
   } catch (error) {
+    console.log(error);
     res.status(404).json({ message: "User not found", error });
   }
 };
