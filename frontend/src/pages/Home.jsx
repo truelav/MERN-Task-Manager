@@ -1,15 +1,22 @@
 import { useEffect, useState } from "react";
-import axios from "../utils/axios";
+import { useDispatch, useSelector } from "react-redux";
+import { Tabs, Tab, Grid } from "@mui/material";
 
-import { Tabs, Tab } from "@mui/material";
+import axios from "../utils/axios";
+import { fetchPosts } from "../../redux/slices/posts";
 
 // import { Post } from "../components/Post";
 // import { TagsBlock } from "../components/TagsBlock";
 // import { CommentsBlock } from "../components/CommentsBlock";
 
 const Home = () => {
+  const dispatch = useDispatch();
+  const { posts, tags } = useSelector((state) => state.posts);
+
+  console.log(posts);
+
   useEffect(() => {
-    axios.get("/posts/posts");
+    dispatch(fetchPosts());
   }, []);
   return (
     <>

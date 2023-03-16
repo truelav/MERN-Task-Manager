@@ -22,7 +22,7 @@ const connectDB = async () => {
 //        MIDLLEWARE
 app.use(express.json());
 app.use(morgan("tiny"));
-// app.use(cors);
+app.use(cors());
 
 //        ROUTES
 app.use("/api", allRoutes);
