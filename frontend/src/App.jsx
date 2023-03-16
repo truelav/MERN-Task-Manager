@@ -5,12 +5,18 @@ import Container from "@mui/material/Container";
 
 import { Home, FullPost, Registration, AddPost, Login } from "./pages";
 
-import HeaderComponent from "./components/HeaderComponent";
+import HeaderComponent from "./components/Header/HeaderComponent";
 
 import "./styles/App.css";
 import { Route, Routes } from "react-router";
 
 function App() {
+  const [posts, setPosts] = useState([]);
+
+  useEffect(() => {
+    // axios.get("")
+  });
+
   return (
     <>
       <HeaderComponent />

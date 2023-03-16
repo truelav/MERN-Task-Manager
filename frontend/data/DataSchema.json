@@ -1,0 +1,79 @@
+{
+  "us": {
+    "products": [
+      {
+        "id": "LT-50MAW805",
+        "header": "50” 4K UHD Roku Smart LED TV Quantum Series",
+        "screenSize": "50",
+        "series": "Quantum Series",
+        "relatedProducts": ["LT-55MAW705", "LT-50MAW705", "LT-58MAW804"],
+        "specsBulletPoints": [
+          "50” screen (measured diagonally) with 16:9 aspect ratio",
+          "3840 x 2160 native resolution for Ultra High Definition (4K) performance",
+          "Screen Refresh Rate : 60Hz",
+          "Contrast Ratio : 6000:1",
+          "3 HDMI® inputs for true digital connections",
+          "USB X 1 port for MediaPlayer and Live TV Pause",
+          "Built-in speakers 8W x2",
+          "Simple, personalized home screen",
+          "Stream free TV, live news, sports, movies and more.",
+          "Tons of free entertainment"
+        ],
+        "buyNowLink": "https://www.walmart.com/ip/JVC-50-Class-4K-UHD-QLED-Roku-Smart-TV-Quantum-Series/567012476",
+        "productImageLinks": [],
+        "lifestyleImageLinks": [],
+        "specsImageLinks": [],
+        "filesImageLinks": [],
+        "isSmart": "true",
+        "isRoku": "true",
+        "introParagraph": "UHD-The JVC 4K UHD technology offers an amazingly pristine image with a resolution of 3840 x 2160. Enjoy the ultimate entertainment with a defined picture that will leave any viewer in awe. 4K is the future and JVC delivers it to your home.",
+        "lifestyleSections": {
+          "modelLifestyle": {
+            "header": "4K Quantum UHD Smart Roku DLED TV",
+            "paragraph": "The 50” JVC Quantum Series brings you top-of-the-line quality and all the best features you can ask for in a TV. With a pristine and exquisite QLED Panel you have the best quality picture under your roof. Experience quantum color, a realistic image that brings each scene to life with a wider range of colors and dynamic contrast. With Roku, you can navigate and stream all of your favorite shows and movies.",
+            "imageUrl": "https://jvcproducts.com/us/products/50maw805/lifestyle2.jpg"
+          },
+          "premiumPicture": {
+            "header": "Premium Picture",
+            "paragraph": "The JVC 50” Class 4K Tv offers an amazingly pristine image with a resolution of 3840(H) x 2180(V). Enjoy the ultimate in entertainment with a defined picture that will leave any viewer in awe. High quality picture is the future and JVC delivers it to your home.",
+            "imageUrl": "https://jvcproducts.com/us/products/50maw805/lifestyle1.jpg"
+          },
+          "HDR": {
+            "header": "High Dynamic Range",
+            "paragraph": "Experience a realistic image that brings each scene to life with a wider range of colors and dynamic contrast. Stop viewing black voids that are meant to be deep shadows or bright washed out scenes with no detail. High Dynamic Range allows you to experience the film as the director intended with vivid unsaturated color.",
+            "imageUrl": "https://jvcproducts.com/us/products/50maw805/lifestyle3.jpg"
+          }
+        },
+        "reasonToBuySection": {
+          "header": "Top reasons to choose JVC 50” Quantum Series.",
+          "reasonsList": [
+            ["Quantum Colors", "Realistic Life Image"],
+            ["Edge-to-Edge Viewing", "Our Wide Color Performance"],
+            ["Dynamic Range", "HDR Technology"],
+            ["Streaming Friendly", "Cable, Antenna Friendly"]
+          ]
+        },
+        "specificationsName": [
+          "Screen Aspect Ration",
+          "Resolution",
+          "Screen Refresh Rate",
+          "Contrast Ration",
+          "Brightness",
+          "Response Time",
+          "Viewing Angle"
+        ],
+        "terminalsName": [
+          "Analog & Digital TV Tuner",
+          "Composite Video Input",
+          "USB Input",
+          "HDMI Input",
+          "Earphone",
+          "Optical Digital Output",
+          "RJ45"
+        ]
+      }
+    ]
+  },
+  "can": {},
+  "product": {}
+}
