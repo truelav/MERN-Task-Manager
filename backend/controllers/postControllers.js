@@ -9,6 +9,7 @@ export const create = async (req, res) => {
       tags: req.body.tags,
       imageUrl: req.body.imageUrl,
       user: req.id,
+      viewCount: 1,
     });
 
     await doc.save();
@@ -22,7 +23,7 @@ export const create = async (req, res) => {
 
 export const getAll = async (req, res) => {
   try {
-    const allPosts = await Post.find();
+    const allPosts = await Post.find().populate("user").exec();
 
     res.status(200).json(allPosts);
   } catch (error) {
